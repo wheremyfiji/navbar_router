@@ -11,9 +11,9 @@ class NavbarSample extends StatefulWidget {
 
 class _NavbarSampleState extends State<NavbarSample> {
   List<NavbarItem> items = [
-    NavbarItem(Icons.home, 'Home', backgroundColor: colors[0]),
-    NavbarItem(Icons.shopping_bag, 'Products', backgroundColor: colors[1]),
-    NavbarItem(Icons.person, 'Me', backgroundColor: colors[2]),
+    NavbarItem(Icons.home, Icons.home, 'Home', backgroundColor: colors[0]),
+    NavbarItem(Icons.shopping_bag, Icons.shopping_bag, 'Products', backgroundColor: colors[1]),
+    NavbarItem(Icons.person, Icons.person, 'Me', backgroundColor: colors[2]),
   ];
   final Map<int, Map<String, Widget>> routes = {
     0: {
