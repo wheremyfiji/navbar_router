@@ -1,10 +1,13 @@
 part of 'navbar_router.dart';
 
 class NavbarItem {
-  const NavbarItem(this.iconData, this.text, {this.backgroundColor});
+  const NavbarItem(this.iconData, this.selectedIconData, this.text, {this.backgroundColor});
 
   /// IconData for the navbar item
   final IconData iconData;
+
+  /// IconData for the selected navbar item
+  final IconData selectedIconData;
 
   /// label for the navbar item
   final String text;
@@ -169,42 +172,56 @@ class _AnimatedNavBarState extends State<_AnimatedNavBar>
                     destinations: widget.menuItems.map((NavbarItem menuItem) {
                       return NavigationRailDestination(
                         icon: Icon(menuItem.iconData),
+                        selectedIcon: Icon(menuItem.selectedIconData),
                         label: Text(menuItem.text),
                       );
                     }).toList(),
                     selectedIndex: NavbarNotifier.currentIndex)
-                : BottomNavigationBar(
-                    type: widget.decoration?.navbarType,
-                    currentIndex: NavbarNotifier.currentIndex,
-                    onTap: (x) {
+                : NavigationBar(
+                    destinations: widget.menuItems.map((NavbarItem menuItem) {
+                      return NavigationDestination(
+                        icon: Icon(menuItem.iconData),
+                        selectedIcon: Icon(menuItem.selectedIconData),
+                        label: menuItem.text,
+                      );
+                    }).toList(),
+                    selectedIndex: NavbarNotifier.currentIndex,
+                    onDestinationSelected: (x) {
                       widget.onItemTapped(x);
                     },
-                    backgroundColor: widget.decoration?.backgroundColor,
-                    showSelectedLabels: widget.decoration?.showSelectedLabels,
-                    enableFeedback: widget.decoration?.enableFeedback,
-                    showUnselectedLabels:
-                        widget.decoration?.showUnselectedLabels,
-                    elevation: widget.decoration?.elevation,
-                    iconSize: Theme.of(context).iconTheme.size ?? 24.0,
-                    unselectedItemColor: widget.decoration?.unselectedItemColor,
-                    selectedItemColor:
-                        widget.decoration!.selectedLabelTextStyle?.color,
-                    unselectedLabelStyle:
-                        widget.decoration!.unselectedLabelTextStyle,
-                    selectedLabelStyle:
-                        widget.decoration?.selectedLabelTextStyle,
-                    selectedIconTheme: widget.decoration!.selectedIconTheme,
-                    unselectedIconTheme: widget.decoration?.unselectedIconTheme,
-                    items: widget.menuItems
-                        .map((NavbarItem menuItem) => BottomNavigationBarItem(
-                              backgroundColor: menuItem.backgroundColor,
-                              icon: Icon(
-                                menuItem.iconData,
-                              ),
-                              label: menuItem.text,
-                            ))
-                        .toList(),
                   ),
+            // BottomNavigationBar(
+            //     type: widget.decoration?.navbarType,
+            //     currentIndex: NavbarNotifier.currentIndex,
+            //     onTap: (x) {
+            //       widget.onItemTapped(x);
+            //     },
+            //     backgroundColor: widget.decoration?.backgroundColor,
+            //     showSelectedLabels: widget.decoration?.showSelectedLabels,
+            //     enableFeedback: widget.decoration?.enableFeedback,
+            //     showUnselectedLabels:
+            //         widget.decoration?.showUnselectedLabels,
+            //     elevation: widget.decoration?.elevation,
+            //     iconSize: Theme.of(context).iconTheme.size ?? 24.0,
+            //     unselectedItemColor: widget.decoration?.unselectedItemColor,
+            //     selectedItemColor:
+            //         widget.decoration!.selectedLabelTextStyle?.color,
+            //     unselectedLabelStyle:
+            //         widget.decoration!.unselectedLabelTextStyle,
+            //     selectedLabelStyle:
+            //         widget.decoration?.selectedLabelTextStyle,
+            //     selectedIconTheme: widget.decoration!.selectedIconTheme,
+            //     unselectedIconTheme: widget.decoration?.unselectedIconTheme,
+            //     items: widget.menuItems
+            //         .map((NavbarItem menuItem) => BottomNavigationBarItem(
+            //               backgroundColor: menuItem.backgroundColor,
+            //               icon: Icon(
+            //                 menuItem.iconData,
+            //               ),
+            //               label: menuItem.text,
+            //             ))
+            //         .toList(),
+            //   ),
           );
         });
   }
